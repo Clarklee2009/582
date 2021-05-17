@@ -11,3 +11,6 @@ def decrypt(key, ciphertext):
     plaintext = ""
     # YOUR CODE HERE
     return plaintext
+
+
+print(encrypt(1, "BASE"))
