@@ -14,3 +14,7 @@ def decrypt(key, ciphertext):
         plaintext += chr((ord(i) - key - 65) % 26 + 65)
 
     return plaintext
+
+
+# print("******")
+# print(pow(12345, 54321, 101))
