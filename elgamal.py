@@ -35,5 +35,5 @@ def decrypt(sk, c):
     return m
 
 
-m = decrypt(sk, c)
-print(m)
+# m = decrypt(sk, c)
+# print(m)
