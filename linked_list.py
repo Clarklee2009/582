@@ -33,7 +33,7 @@ M4BlockChain.append(create_genesis_block())
 def next_block(last_block):
     i = last_block.index + 1
     t = datetime.now()
-    c = "this is blick" + i
+    c = "this is blick " + str(i)
     p = last_block.calc_hash()
     return Block(i, t, c, p)
 
