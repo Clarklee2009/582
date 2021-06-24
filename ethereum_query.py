@@ -46,8 +46,7 @@ def get_most_expensive_transaction(block_num):
     m = 0  #YOUR CODE HERE
     bl = w3.eth.get_block(block_num)
     for tr in bl.transactions:
-        tc = get_transaction_cost(tr)
-        if tc > m:
-            m = tc
+        if get_transaction_cost(tr) > m:
+            m = get_transaction_cost(tr)
     max_tx = HexBytes(m)  #YOUR CODE HERE
     return max_tx
