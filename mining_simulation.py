@@ -37,7 +37,10 @@ def Simulate(alpha,gamma,N, seed):
                 #The selfish miners found a new block.
                 #Write a piece of code to change the required variables.
                 #You might need to define new variable to keep track of the number of hidden blocks.
+                state = 2
+                n = 2
             else:
+                state=-1
                 #Write a piece of code to change the required variables.
 
         elif state==-1:
@@ -45,25 +48,42 @@ def Simulate(alpha,gamma,N, seed):
             #There are three situations! 
             #Write a piece of code to change the required variables in each one.
             if r<=alpha:
+                ChainLength += 2
+                state = 0
+                SelfishRevenue += 2
 
             elif r<=alpha+(1-alpha)*gamma:
+                ChainLength += 2
+                state = 0
+                SelfishRevenue += 1
 
             else:
+                ChainLength += 2
+                state = 0
+                SelfishRevenue += 0
 
 
         elif state==2:
             #The selfish pool has 2 hidden block.
             if r<=alpha:
+                n += 1
+                state = 3
 
             else:
                 #The honest miners found a block.
+                ChainLength += n
+                state = 0
+                SelfishRevenue += n
 
         elif state>2:
             if r<=alpha:
                 #The selfish miners found a new block
+                n += 1
+                state += 1
 
             else:
                 #The honest miners found a block
+                state -= 1
 
     return float(SelfishRevenue)/ChainLength
 
@@ -83,3 +103,10 @@ seed = 100
 print("Theoretical probability :",(alpha*(1-alpha)**2*(4*alpha+gamma*(1-2*alpha))-alpha**3)/(1-alpha*(1+(2-alpha)*alpha)))
 print("Simulated probability :",Simulate(alpha,gamma,Nsimu, seed))
 """
+alpha=0.35
+gamma=0.5
+Nsimu=10**7
+seed = 100
+#This is the theoretical probability computed in the original paper
+print("Theoretical probability :",(alpha*(1-alpha)**2*(4*alpha+gamma*(1-2*alpha))-alpha**3)/(1-alpha*(1+(2-alpha)*alpha)))
+print("Simulated probability :",Simulate(alpha,gamma,Nsimu, seed))
