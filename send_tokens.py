@@ -24,7 +24,11 @@ def send_tokens( receiver_pk, tx_amount ):
     last_valid_round = params.last
     send_amount = tx_amount
     sender_pk = "ETDAKVEINZPELBYJ2LENU7W22CRRZSLVCQQS7VTWYGN64HOXMQNQFZ5DHA"
+    pk = "5grZeTkaepfqX9ma+NzuhhXT2GeP/aJeWAodqXy8tqckxgVUiG5eRYcJ0sjaftrQoxzJdRQhL9Z2wZvuHddkGw=="
     send_to_address = receiver_pk
+    tx = transaction.PaymentTxn(sender_pk, tx_fee, first_valid_round, last_valid_round, gen_hash, send_to_address, send_amount, flat_fee=True)
+    signed_tx = tx.sign(pk)
+    txid = acl.send_transaction(signed_tx)
 
     #Your code here
 
