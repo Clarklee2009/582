@@ -12,7 +12,7 @@ app.url_map.strict_slashes = False
 def verify():
     content = request.get_json(silent=True)
     print("this is test*************************************")
-    print(content[payload])
+    # print(content[payload])
 
 
     #Check if signature is valid
