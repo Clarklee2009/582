@@ -22,6 +22,9 @@ def send_tokens( receiver_pk, tx_amount ):
     first_valid_round = params.first
     tx_fee = params.min_fee
     last_valid_round = params.last
+    send_amount = tx_amount
+    sender_pk = "ETDAKVEINZPELBYJ2LENU7W22CRRZSLVCQQS7VTWYGN64HOXMQNQFZ5DHA"
+    send_to_address = receiver_pk
 
     #Your code here
 
