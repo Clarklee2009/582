@@ -13,8 +13,7 @@ def process_order(order):
     order_obj = Order(sender_pk=order['sender_pk'],receiver_pk=order['receiver_pk'], 
                       buy_currency=order['buy_currency'], sell_currency=order['sell_currency'], 
                       buy_amount=order['buy_amount'], sell_amount=order['sell_amount'] )
-    session.add(order_obj)
-    session.commit()
+    
     orders = session.query(Order).filter(Order.filled != "").all() 
     for e_order in orders:
       #2 Check if there are any existing orders that match
@@ -24,6 +23,7 @@ def process_order(order):
             time = datetime.now()
             order["filled"] = time
             e_order.filled = time
+            print(order["filled"], e_order.filled )
             
             #3.2 Set counterparty_id to be the id of the other order
     
