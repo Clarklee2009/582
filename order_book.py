@@ -23,9 +23,28 @@ def process_order(order):
             time = datetime.now()
             order["filled"] = time
             e_order.filled = time
-            print(order["filled"], e_order.filled )
             
             #3.2 Set counterparty_id to be the id of the other order
+            e_order.counterparty_id = order['id']
+            session.add(e_order)
+            session.commit()
+            #3.3 if not completely filled
+            if order["sell_amount"] < e_order.buy_amount:
+              c_by = e_order.id
+              n_sell = e_order.sell_amount - order["sell_amount"]
+              n_buy = n_sell * (e_order.sell_amount/e_order.buy_amount)
+              new_order = Order(sender_pk=order['sender_pk'],receiver_pk=order['receiver_pk'], 
+                      buy_currency=order['buy_currency'], sell_currency=order['sell_currency'], 
+                      buy_amount=n_buy, sell_amount=n_sell, created_id=c_by )
+              e_order.child = new_order
+            
+            
+            
+
+
+    
+    
+    
     
     session.add(order_obj)
     session.commit()
