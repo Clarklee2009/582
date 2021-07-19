@@ -26,4 +26,5 @@ def process_order(order):
             
             #3.2 Set counterparty_id to be the id of the other order
     
-    
+    session.add(order_obj)
+    session.commit()
