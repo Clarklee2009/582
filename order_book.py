@@ -31,7 +31,7 @@ def process_order(order):
             order_obj.counterparty_id = e_order.id
             
             #3.3 if not completely filled
-
+            new_order = ""
             if order_obj.buy_amount > e_order.sell_amount:
               c_by = order_obj.id
               n_buy = order_obj.buy_amount - e_order.sell_amount
@@ -39,7 +39,7 @@ def process_order(order):
               new_order = Order(sender_pk=order_obj.sender_pk,receiver_pk=order_obj.receiver_pk, 
                       buy_currency=order_obj.buy_currency, sell_currency=order_obj.sell_currency, 
                       buy_amount=n_buy, sell_amount=n_sell, creator_id=c_by )
-              session.commit()
+
             elif e_order.buy_amount > order_obj.sell_amount:
               c_by = e_order.id
               n_buy = e_order.buy_amount - order_obj.sell_amount
@@ -47,6 +47,7 @@ def process_order(order):
               new_order = Order(sender_pk=e_order.sender_pk,receiver_pk=e_order.receiver_pk, 
                       buy_currency=e_order.buy_currency, sell_currency=e_order.sell_currency, 
                       buy_amount=n_buy, sell_amount=n_sell, creator_id=c_by )
+            session.add(new_order)
             session.commit()
             break
     session.commit()
