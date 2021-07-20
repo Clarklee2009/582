@@ -41,5 +41,5 @@ def process_order(order):
             
              
               break
-            session.commit()
+    session.commit()
     
