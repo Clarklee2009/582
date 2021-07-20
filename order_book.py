@@ -46,6 +46,7 @@ def process_order(order):
               new_order = Order(sender_pk=e_order.sender_pk,receiver_pk=e_order.receiver_pk, 
                       buy_currency=e_order.buy_currency, sell_currency=e_order.sell_currency, 
                       buy_amount=n_buy, sell_amount=n_sell, creator_id=c_by )
+            session.commit()
             break
     session.commit()
     
