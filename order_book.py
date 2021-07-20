@@ -14,22 +14,22 @@ def process_order(order):
                       buy_currency=order['buy_currency'], sell_currency=order['sell_currency'], 
                       buy_amount=order['buy_amount'], sell_amount=order['sell_amount'] )
     session.add(order_obj)
-    session.commit()
+    
     orders = session.query(Order).filter(Order.filled == None).all() 
     for e_order in orders:
       #2 Check if there are any existing orders that match
         if e_order.buy_currency == order_obj.sell_currency and e_order.sell_currency == order_obj.buy_currency:
           if e_order.sell_amount/ e_order.buy_amount >= order_obj.buy_amount/order_obj.sell_amount:
             #3.1 Set the filled field to be the current timestamp on both orders
-            session.commit()
+            
             time = datetime.now()
             order_obj.filled = time
             e_order.filled = time
-            session.commit()
+            
             #3.2 Set counterparty_id to be the id of the other order
             e_order.counterparty_id = order_obj.id
             order_obj.counterparty_id = e_order.id
-            session.commit()
+            
             #3.3 if not completely filled
 
             if order_obj.buy_amount > e_order.sell_amount:
