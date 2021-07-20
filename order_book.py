@@ -24,7 +24,7 @@ def process_order(order):
             time = datetime.now()
             order_obj.filled = time
             e_order.filled = time
-            
+            session.commit()
             #3.2 Set counterparty_id to be the id of the other order
             e_order.counterparty_id = order_obj.id
             order_obj.counterparty_id = e_order.id
@@ -38,6 +38,7 @@ def process_order(order):
               new_order = Order(sender_pk=order_obj.sender_pk,receiver_pk=order_obj.receiver_pk, 
                       buy_currency=order_obj.buy_currency, sell_currency=order_obj.sell_currency, 
                       buy_amount=n_buy, sell_amount=n_sell, creator_id=c_by )
+              session.commit()
              
               break
-    session.commit()
+    
