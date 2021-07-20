@@ -13,7 +13,8 @@ def process_order(order):
     order_obj = Order(sender_pk=order['sender_pk'],receiver_pk=order['receiver_pk'], 
                       buy_currency=order['buy_currency'], sell_currency=order['sell_currency'], 
                       buy_amount=order['buy_amount'], sell_amount=order['sell_amount'] )
-    
+    session.add(order_obj)
+    session.commit()
     orders = session.query(Order).filter(Order.filled != "").all() 
     for e_order in orders:
       #2 Check if there are any existing orders that match
@@ -37,10 +38,11 @@ def process_order(order):
                       buy_currency=order['buy_currency'], sell_currency=order['sell_currency'], 
                       buy_amount=n_buy, sell_amount=n_sell, created_id=c_by )
               e_order.child = new_order
+              session.add(e_order)
+              session.commit()
               
     
-    session.add(order_obj)
-    session.commit()
+
     
     pass
     
