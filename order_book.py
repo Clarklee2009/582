@@ -28,6 +28,7 @@ def process_order(order):
             
             #3.2 Set counterparty_id to be the id of the other order
             e_order.counterparty_id = order_obj.id
+            order_obj.counterparty_id = e_order.id
             session.commit()
             #3.3 if not completely filled
 
