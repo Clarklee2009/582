@@ -15,7 +15,7 @@ def process_order(order):
                       buy_amount=order['buy_amount'], sell_amount=order['sell_amount'] )
     session.add(order_obj)
     
-    orders = session.query(Order).filter(Order.filled != "").all() 
+    orders = session.query(Order).filter(Order.filled == "").all() 
     for e_order in orders:
       #2 Check if there are any existing orders that match
         if e_order.buy_currency == order_obj.sell_currency and e_order.sell_currency == order_obj.buy_currency:
