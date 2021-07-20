@@ -41,8 +41,5 @@ def process_order(order):
               session.add(e_order)
               session.commit()
               
-    
 
-    
-    pass
     
