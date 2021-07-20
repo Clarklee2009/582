@@ -24,7 +24,6 @@ def process_order(order):
             time = datetime.now()
             order_obj.filled = time
             e_order.filled = time
-            print(order_obj, e_order.filled)
             
             #3.2 Set counterparty_id to be the id of the other order
             e_order.counterparty_id = order_obj.id
