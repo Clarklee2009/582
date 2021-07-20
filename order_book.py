@@ -37,14 +37,10 @@ def process_order(order):
                       buy_currency=order['buy_currency'], sell_currency=order['sell_currency'], 
                       buy_amount=n_buy, sell_amount=n_sell, created_id=c_by )
               e_order.child = new_order
-            
-            
-            
-
-
-    
-    
-    
+              
     
     session.add(order_obj)
     session.commit()
+    
+    pass
+    
