@@ -122,8 +122,12 @@ def order_book():
     for order in orders:
         print(order)
         list.append(order)
-    result = {'data': list}
-    return jsonify(result)
+    if list:
+        result = {'data': list}
+        return jsonify(result)
+    else:
+        result = {'data': "no order"}
+        return jsonify(result)
 
 if __name__ == '__main__':
     app.run(port='5002', debug=True)
