@@ -84,6 +84,7 @@ def trade():
         valid = False
         if platform == "Ethereum":
             eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
+            print(eth_encoded_msg)
             if eth_account.Account.recover_message(eth_encoded_msg,signature=sig) == pk:
                 print( "Eth sig verifies!" )
                 valid = True
@@ -111,11 +112,11 @@ def trade():
         #Note that you can access the database session using g.session
 
 
-@app.route('/order_book')
-def order_book():
-    #Your code here
-    #Note that you can access the database session using g.session
-    return jsonify(result)
+# @app.route('/order_book')
+# def order_book():
+#     #Your code here
+#     #Note that you can access the database session using g.session
+#     return jsonify(result)
 
 if __name__ == '__main__':
     app.run(port='5002', debug=True)
