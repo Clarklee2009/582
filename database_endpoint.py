@@ -54,7 +54,6 @@ def trade():
         # print( f"content = {json.dumps(content)}" )
         columns = [ "sender_pk", "receiver_pk", "buy_currency", "sell_currency", "buy_amount", "sell_amount", "platform" ]
         fields = [ "sig", "payload" ]
-        platforms = ["Algorant", "Ethereum"]
         platform = content['payload']['platform']
         sig = content['sig']
         pk = content["payload"]["sender_pk"]
@@ -85,7 +84,7 @@ def trade():
             if eth_account.Account.recover_message(eth_encoded_msg,signature=sig) == pk:
                 print( "Eth sig verifies!" )
                 valid = True
-        elif platform == "Algorant":
+        if platform == "Algorand":
             print("algo###############################3", platform)
             if algosdk.util.verify_bytes(payload.encode('utf-8'),sig,pk):
                 print( "Algo sig verifies!" )
