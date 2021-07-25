@@ -32,6 +32,7 @@ def shutdown_session(response_or_exc):
 
 def log_message(d):
     # Takes input dictionary d and writes it to the Log table
+    print(type(d))
     log_obj = Log(message = d)
     g.session.add(log_obj)
     g.session.commit()
@@ -58,8 +59,7 @@ def trade():
         sig = content['sig']
         pk = content["payload"]["sender_pk"]
         payload = json.dumps(content["payload"])
-
-        print(platform)
+        
         error = False
         for field in fields:
             if not field in content.keys():
@@ -84,7 +84,6 @@ def trade():
         valid = False
         if platform == "Ethereum":
             eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
-            print(eth_encoded_msg)
             if eth_account.Account.recover_message(eth_encoded_msg,signature=sig) == pk:
                 print( "Eth sig verifies!" )
                 valid = True
@@ -92,7 +91,7 @@ def trade():
             if algosdk.util.verify_bytes(payload.encode('utf-8'),sig,pk):
                 print( "Algo sig verifies!" )
                 valid = True
-        #if valid, store in order table, if not store in log table
+        #if valid, store order in order table, if not store in log table
         if valid:
             order_obj = Order(sender_pk=content["payload"]['sender_pk'],receiver_pk=content["payload"]['receiver_pk'], 
                       buy_currency=content["payload"]['buy_currency'], sell_currency=content["payload"]['sell_currency'], 
@@ -103,9 +102,6 @@ def trade():
         else:
             log_message(payload)
             print("add to log")
-
-
-
 
     return jsonify(True)  
         #Your code here
