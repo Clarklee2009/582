@@ -116,10 +116,19 @@ def order_book():
     list = []
     orders = g.session.query(Order).filter().all()
     for order in orders:
-        print(order)
-        list.append(order)
+        order_dic = {}
+        order_dic['sender_pk'] = order.sender_pk
+        order_dic['receiver_pk'] = order.receiver_pk
+        order_dic['buy_currency'] = order.buy_currency
+        order_dic['sell_currency'] = order.sell_currency
+        order_dic['buy_amount'] = order.buy_amount
+        order_dic['sell_amount'] = order.sell_amount
+        order_dic['signature'] = order.signature
+        list.append(order_dic)
+        print(list)
     if list:
         result['data'] = list
+        print(result)
         return jsonify(result)
     else:
         result = {'data': "no order"}
