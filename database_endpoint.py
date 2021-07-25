@@ -125,14 +125,10 @@ def order_book():
         order_dic['sell_amount'] = order.sell_amount
         order_dic['signature'] = order.signature
         list.append(order_dic)
-        print(list)
-    if list:
-        result['data'] = list
-        print(result)
-        return jsonify(result)
-    else:
-        result = {'data': "no order"}
-        return jsonify(result)
+    
+    result['data'] = list
+    return jsonify(result)
+
 
 if __name__ == '__main__':
     app.run(port='5002', debug=True)
