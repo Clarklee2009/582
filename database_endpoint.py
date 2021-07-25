@@ -8,6 +8,7 @@ import algosdk
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import load_only
+from werkzeug.wrappers.request import PlainRequest
 
 from models import Base, Order, Log
 engine = create_engine('sqlite:///orders.db')
@@ -32,7 +33,6 @@ def shutdown_session(response_or_exc):
 
 def log_message(d):
     # Takes input dictionary d and writes it to the Log table
-    print(type(d))
     log_obj = Log(message = json.dumps(d))
     g.session.add(log_obj)
     g.session.commit()
@@ -73,8 +73,6 @@ def trade():
             if not column in content['payload'].keys():
                 print( f"{column} not received by Trade" )
                 error = True
-            if platform not in platforms:
-                error = True
         if error:
             # print( json.dumps(content) )
             log_message(content)
@@ -87,7 +85,8 @@ def trade():
             if eth_account.Account.recover_message(eth_encoded_msg,signature=sig) == pk:
                 print( "Eth sig verifies!" )
                 valid = True
-        elif platform == "Algorand":
+        elif platform == "Algorant":
+            print("algo###############################3", platform)
             if algosdk.util.verify_bytes(payload.encode('utf-8'),sig,pk):
                 print( "Algo sig verifies!" )
                 valid = True
