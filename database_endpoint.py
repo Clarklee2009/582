@@ -95,7 +95,7 @@ def trade():
         if valid:
             order_obj = Order(sender_pk=content["payload"]['sender_pk'],receiver_pk=content["payload"]['receiver_pk'], 
                       buy_currency=content["payload"]['buy_currency'], sell_currency=content["payload"]['sell_currency'], 
-                      buy_amount=content["payload"]['buy_amount'], sell_amount=content["payload"]['sell_amount'], sig=sig)
+                      buy_amount=content["payload"]['buy_amount'], sell_amount=content["payload"]['sell_amount'], signature=sig)
             g.session.add(order_obj)
             g.session.commit()
             print("add order to table")
