@@ -112,14 +112,14 @@ def trade():
 def order_book():
     #Your code here
     #Note that you can access the database session using g.session
-    
+    result = {}
     list = []
     orders = g.session.query(Order).filter().all()
     for order in orders:
         print(order)
         list.append(order)
     if list:
-        result = {'data': list}
+        result['data'] = list
         return jsonify(result)
     else:
         result = {'data': "no order"}
