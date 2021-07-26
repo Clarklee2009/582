@@ -7,14 +7,14 @@ def ZK_equality(G,H):
     r1 = Secret(utils.get_random_num(bits=128))
     r2 = Secret(utils.get_random_num(bits=128))
 
-    m=Secret()
+    m=1
     C1 = r1.value * G
     C2 = m * G + r1.value * H
 
     D1 = r2.value * G
     D2 = m*G + r2.value*H
     # stmt = DLRep(C1, r1 * H, simulated=True) | DLRep(C1 - G, r1 * H) | (DLRep(C2, r2 * H, simulated=True) | DLRep(C2 - G, r2 * H))
-    stmt = DLRep(C1, r1 * H) | DLRep(C2 - m*G, r1 * H) | DLRep(D1, r2 * H) | DLRep(D2 - m*G, r2 * H)
+    stmt = DLRep(C1, r1 * G) | DLRep(C2 , r1 * H + m*G) | DLRep(D1, r2 * G) | DLRep(D2, r2 * H + m*G)
 
     # print(stmt)
     zk_proof = stmt.prove()
