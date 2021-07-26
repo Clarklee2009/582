@@ -14,7 +14,7 @@ def ZK_equality(G,H):
     D1 = r2.value * G
     D2 = m*G + r2.value*H
     # stmt = DLRep(C1, r1 * H, simulated=True) | DLRep(C1 - G, r1 * H) | (DLRep(C2, r2 * H, simulated=True) | DLRep(C2 - G, r2 * H))
-    stmt = DLRep(C1, r1 * G) | DLRep(C2 , r1 * H + m*G) | DLRep(D1, r2 * G) | DLRep(D2, r2 * H + m*G)
+    stmt = DLRep(C1, r1 * H) | DLRep(C2 , r1 * H + m*G) | DLRep(D1, r2 * H) | DLRep(D2, r2 * H + m*G)
 
     # print(stmt)
     zk_proof = stmt.prove()
