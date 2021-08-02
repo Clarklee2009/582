@@ -65,6 +65,7 @@ class TXO:
             # print("****************",lst)
                     
             for i in range(l):
+                print("^^^^^^^^^^^^^^^^^^^^^^^^^^")
                 v = lst.pop(0)  
                 print("@@@@@",v)
                 print(l, i)
@@ -72,7 +73,7 @@ class TXO:
                 txx = self.from_tx_hash(v['txid'])
                 print("$$$$$$",self.tx_hash)
                 txx.inputs = tm['vin']
-                # print("&&&&&&&&&&&&&", txx.inputs)
+                # print("&&&&&&&&&&&&&")
                 lst.extend(txx.inputs)
             d -= 1
 
