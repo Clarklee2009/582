@@ -47,9 +47,16 @@ class TXO:
         txo = TXO(tx_hash, n_number, amount, owner, time)
         return txo
         
-        #YOUR CODE HERE
 
     def get_inputs(self,d=1):
-        pass
-        #YOUR CODE HERE
+        tx = rpc_connection.getrawtransaction(self.tx_hash,True)
+        self.inputs = tx['vin']
+        if d == 0:
+            return
+        txo = self.from_tx_hash(self,self.tx_hash,n=d)
+        self.get_inputs(txo, d-1)
+
+
+
+
 
