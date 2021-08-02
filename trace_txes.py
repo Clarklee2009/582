@@ -61,10 +61,10 @@ class TXO:
         for _ in range(d-1):
             lst = tx['vin']
             for v in lst:
-                print(v)
+                print("@@@@@",v)
                 tm = rpc_connection.getrawtransaction(v['txid'],True)
                 txx = self.from_tx_hash(v['txid'],d-1)
-                print(self.tx_hash)
+                print("$$$$$$",self.tx_hash)
                 txx.inputs = tm['vin']
 
         
