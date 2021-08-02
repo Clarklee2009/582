@@ -44,7 +44,7 @@ class TXO:
         print("!!!!!!",t_list)
         n_list = t_list[n]
         print("@@@@@@",n_list)
-        time =  datetime.fromtimestamp(t_list['time'])
+        time =  datetime.fromtimestamp(tx['time'])
         print("#######",time)
         owner = n_list["addresses"][0]
         print(owner)
