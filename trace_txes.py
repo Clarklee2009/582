@@ -59,9 +59,10 @@ class TXO:
 
         txo.inputs = tx['vin']
         lst = tx['vin']
-        print("****************",lst)
-        for j in range(d):
+        
+        while lst:
             l = len(lst)
+            print("****************",lst)
             v = lst.pop(0)          
             for i in range(l):
                 print("@@@@@",v)
