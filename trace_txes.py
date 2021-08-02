@@ -63,6 +63,7 @@ class TXO:
             l = len(lst)          
             for i in range(l):
                 print("@@@@@",lst[i])
+                print(l, i)
                 lst.pop(0)
                 tm = rpc_connection.getrawtransaction(lst[i]['txid'],True)
                 txx = self.from_tx_hash(lst[i]['txid'])
