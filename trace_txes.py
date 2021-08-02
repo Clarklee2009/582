@@ -66,6 +66,7 @@ class TXO:
                     
             for i in range(l):
                 print("^^^^^^^^^^^^^^^^^^^^^^^^^^")
+                print(lst)
                 v = lst.pop(0)  
                 print("@@@@@",v)
                 print(l, i)
