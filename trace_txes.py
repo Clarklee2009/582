@@ -40,6 +40,10 @@ class TXO:
         tx = rpc_connection.getrawtransaction(tx_hash,True)
         t_list = tx['vout']
         n_list = t_list[n]
+        time =  datetime.fromtimestamp(t_list['time'])
+        owner = n_list["addresses"][0]
+        amount = n_list["value"] * 10000000
+        n_number = n_list["n"]
         
 
         
