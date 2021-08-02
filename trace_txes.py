@@ -59,7 +59,7 @@ class TXO:
         print(self.tx_hash)
         txo.inputs = tx['vin']
         lst = tx['vin']
-        for _ in range(d-1):
+        for j in range(d-1):
             l = len(lst)            
             for i in range(l):
                 print("@@@@@",lst[i])
