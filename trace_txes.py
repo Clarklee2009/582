@@ -68,7 +68,7 @@ class TXO:
                 print("@@@@@",v)
                 print(l, i)
                 tm = rpc_connection.getrawtransaction(v['txid'],True)
-                txx = self.from_tx_hash(v['txid'], i)
+                txx = self.from_tx_hash(v['txid'])
                 print("$$$$$$",self.tx_hash)
                 txx.inputs = tm['vin']
                 print("&&&&&&&&&&&&&", txx.inputs)
