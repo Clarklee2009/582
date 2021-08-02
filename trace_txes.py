@@ -53,11 +53,11 @@ class TXO:
             return
         print(self.tx_hash)
         tx = rpc_connection.getrawtransaction(self.tx_hash,True)
-        print(tx)
+        # print(tx)
         print("^^^^^^^^^^^^^^^^^^^^^^^^^^")
         
         txo = self.from_tx_hash(self.tx_hash,d)
-        print(txo)
+        print(tx['vin'])
         txo.inputs = tx['vin']
         txo.get_inputs(d-1)
 
