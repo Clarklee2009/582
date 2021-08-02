@@ -56,9 +56,11 @@ class TXO:
         # print(tx)
         print("^^^^^^^^^^^^^^^^^^^^^^^^^^")
         
-        txo = self.from_tx_hash(self.tx_hash,d)
-        print(tx['vin'])
-        txo.inputs = tx['vin']
+        for vin in tx['vin']:
+            txo = self.from_tx_hash(vin['txid'],d)
+            print(tx['vin'])
+            txo.inputs = tx['vin']
+        
         txo.get_inputs(d-1)
 
 
