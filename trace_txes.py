@@ -72,7 +72,7 @@ class TXO:
                 print("$$$$$$",self.tx_hash)
                 txx.inputs = tm['vin']
                 print("&&&&&&&&&&&&&", txx.inputs)
-                lst.append(txx.inputs)
+                lst.extend(txx.inputs)
 
         
 
