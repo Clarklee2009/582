@@ -58,6 +58,6 @@ class TXO:
         print(txo)
         txo.inputs = tx['vin']
         self = txo
-        self.get_inputs(d-1)
+        txo.get_inputs(d-1)
 
 
