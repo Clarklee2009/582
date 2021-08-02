@@ -49,6 +49,7 @@ class TXO:
         cls.amount = amount
         cls.owner = owner
         cls.time = time
+        return cls
         
 
         
