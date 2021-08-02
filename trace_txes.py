@@ -41,11 +41,17 @@ class TXO:
         # print(tx)
         print("start testing")
         t_list = tx['vout']
+        print(t_list)
         n_list = t_list[n]
+        print(n_list)
         time =  datetime.fromtimestamp(t_list['time'])
+        print(time)
         owner = n_list["addresses"][0]
+        print(owner)
         amount = n_list["value"] * 10000000
+        print(amount)
         n_number = n_list["n"]
+        print(n_number)
         print(tx_hash, n_number, amount, owner, time )
 
         txo = TXO(tx_hash, n_number, amount, owner, time)
