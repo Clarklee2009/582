@@ -60,7 +60,7 @@ class TXO:
         txo.inputs = tx['vin']
         lst = tx['vin']
         for j in range(d-1):
-            l = len(lst)            
+            l = len(lst-1)            
             for i in range(l):
                 print("@@@@@",lst[i])
                 tm = rpc_connection.getrawtransaction(lst[i]['txid'],True)
