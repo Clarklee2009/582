@@ -42,7 +42,7 @@ class TXO:
         n_list = t_list[n]
         time =  datetime.fromtimestamp(tx['time'])
         owner = n_list["scriptPubKey"]["addresses"][0]
-        amount = int(n_list["value"] * 10000000)
+        amount = int(n_list["value"] * 100000000)
         n_number = n_list["n"]
         txo = TXO(tx_hash, n_number, amount, owner, time)
         return txo
