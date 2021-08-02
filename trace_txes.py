@@ -61,6 +61,7 @@ class TXO:
         lst = tx['vin']
         
         while d > 0:
+            print(d)
             l = len(lst)
             # print("****************",lst)
                     
