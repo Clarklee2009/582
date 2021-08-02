@@ -59,6 +59,7 @@ class TXO:
 
         txo.inputs = tx['vin']
         lst = tx['vin']
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",d)
         d -= 1
         while d > 0:
             print(d)
