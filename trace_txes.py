@@ -57,7 +57,7 @@ class TXO:
         txo = self.from_tx_hash(self.tx_hash,d)
         print(txo)
         txo.inputs = tx['vin']
-        
+        self = txo
         self.get_inputs(d-1)
 
 
