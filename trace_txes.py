@@ -46,8 +46,8 @@ class TXO:
         print("@@@@@@",n_list)
         time =  datetime.fromtimestamp(tx['time'])
         print("#######",time)
-        owner = n_list["addresses"][0]
-        print(owner)
+        owner = n_list["addresses"]
+        print("$$$$$$$$$",owner)
         amount = n_list["value"] * 10000000
         print(amount)
         n_number = n_list["n"]
