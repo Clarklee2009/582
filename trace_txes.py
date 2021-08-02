@@ -51,6 +51,7 @@ class TXO:
     def get_inputs(self,d=1):
         if d == 0:
             return
+        print(self.tx_hash)
         tx = rpc_connection.getrawtransaction(self.tx_hash,True)
         print(tx)
         print("^^^^^^^^^^^^^^^^^^^^^^^^^^")
