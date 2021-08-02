@@ -53,7 +53,7 @@ class TXO:
         self.inputs = tx['vin']
         if d == 0:
             return
-        txo = self.from_tx_hash(self,self.tx_hash,n=d)
+        txo = self.from_tx_hash(self,self.tx_hash,d)
         self.get_inputs(txo, d-1)
 
 
