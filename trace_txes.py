@@ -39,6 +39,7 @@ class TXO:
     def from_tx_hash(cls,tx_hash,n=0):
         tx = rpc_connection.getrawtransaction(tx_hash,True)
         # print(tx)
+        print("start testing")
         t_list = tx['vout']
         n_list = t_list[n]
         time =  datetime.fromtimestamp(t_list['time'])
