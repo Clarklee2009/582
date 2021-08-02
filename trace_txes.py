@@ -44,6 +44,11 @@ class TXO:
         owner = n_list["addresses"][0]
         amount = n_list["value"] * 10000000
         n_number = n_list["n"]
+        cls.tx_hash = tx_hash 
+        cls.n = n_number
+        cls.amount = amount
+        cls.owner = owner
+        cls.time = time
         
 
         
