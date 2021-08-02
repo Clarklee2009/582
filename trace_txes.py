@@ -52,11 +52,11 @@ class TXO:
         tx = rpc_connection.getrawtransaction(self.tx_hash,True)
         print(d)
         
-        txo = self.from_tx_hash(self.tx_hash,n = 0)
+        txo = self.from_tx_hash(self.tx_hash,d)
         
         txo.inputs = tx['vin']
         if d == 0:
             return
-        self.get_inputs(txo, d-1)
+        self.get_inputs(d-1)
 
 
