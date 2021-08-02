@@ -73,7 +73,7 @@ class TXO:
                 txx = self.from_tx_hash(v['txid'])
                 print("$$$$$$",self.tx_hash)
                 txx.inputs = tm['vin']
-                # print("&&&&&&&&&&&&&")
+                print("&&&&&&&&&&&&&")
                 lst.extend(txx.inputs)
             d -= 1
 
