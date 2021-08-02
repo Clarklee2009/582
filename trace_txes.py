@@ -60,7 +60,7 @@ class TXO:
         txo.inputs = tx['vin']
         lst = tx['vin']
         
-        while lst:
+        while d > 0:
             l = len(lst)
             print("****************",lst)
             v = lst.pop(0)          
@@ -73,6 +73,7 @@ class TXO:
                 txx.inputs = tm['vin']
                 print("&&&&&&&&&&&&&", txx.inputs)
                 lst.extend(txx.inputs)
+            d -= 1
 
         
 
