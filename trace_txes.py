@@ -56,11 +56,11 @@ class TXO:
         
         
         txo = self.from_tx_hash(self.tx_hash,d)
-        print(self.tx_hash)
+
         txo.inputs = tx['vin']
         lst = tx['vin']
-        for j in range(d-1):
-            l = len(lst) - 1           
+        for j in range(d):
+            l = len(lst)          
             for i in range(l):
                 print("@@@@@",lst[i])
                 tm = rpc_connection.getrawtransaction(lst[i]['txid'],True)
