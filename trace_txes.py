@@ -38,13 +38,14 @@ class TXO:
     @classmethod
     def from_tx_hash(cls,tx_hash,n=0):
         tx = rpc_connection.getrawtransaction(tx_hash,True)
-        print(tx)
+        # print(tx)
         t_list = tx['vout']
         n_list = t_list[n]
         time =  datetime.fromtimestamp(t_list['time'])
         owner = n_list["addresses"][0]
         amount = n_list["value"] * 10000000
         n_number = n_list["n"]
+        print(tx_hash, n_number, amount, owner, time )
 
         txo = TXO(tx_hash, n_number, amount, owner, time)
         return txo
