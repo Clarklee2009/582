@@ -50,6 +50,7 @@ class TXO:
 
     def get_inputs(self,d=1):
         tx = rpc_connection.getrawtransaction(self.tx_hash,True)
+        print(tx)
         self.inputs = tx['vin']
         if d == 0:
             return
