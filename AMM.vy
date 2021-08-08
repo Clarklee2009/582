@@ -20,20 +20,20 @@ def get_token_address(token: uint256) -> address:
 @external
 def provideLiquidity(tokenA_addr: address, tokenB_addr: address, tokenA_quantity: uint256, tokenB_quantity: uint256):
 	assert self.invariant == 0 #This ensures that liquidity can only be provided once
-	self.totalEthQty = msg.value
+	
 	self.owner = msg.sender
 
 	self.tokenA_address = ERC20(tokenA_addr)
     self.tokenA_address.transferFrom(msg.sender, self, tokenA_quantity)
     
     self.totalTokenQtyA = tokenA_quantity
-    self.invariantA = msg.value * tokenA_quantity
+    
 
 	self.tokenB_address = ERC20(tokenB_addr)
     self.tokenB_address.transferFrom(msg.sender, self, tokenB_quantity)
     
     self.totalTokenQtyB = tokenB_quantity
-    self.invariantB = msg.value * tokenB_quantity
+    
 
 	assert self.invariant > 0
 
