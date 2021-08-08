@@ -116,7 +116,7 @@ def trade():
                         order_obj.counterparty_id = e_order.id
                         
                         #3.3 if not completely filled
-                        new_order = ""
+                        new_order = Order()
                         if order_obj.buy_amount > e_order.sell_amount:
                             c_by = order_obj.id
                             n_buy = order_obj.buy_amount - e_order.sell_amount
