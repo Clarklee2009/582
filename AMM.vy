@@ -72,4 +72,4 @@ def ownerWithdraw():
 	#Your code here
 	self.token_address.transfer(self.owner, self.totalTokenQtyA)
 	self.token_address.transfer(self.owner, self.totalTokenQtyB)
-    selfdestruct(self.owner)
+	selfdestruct(self.owner)
