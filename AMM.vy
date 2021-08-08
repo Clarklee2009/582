@@ -31,7 +31,7 @@ def provideLiquidity(tokenA_addr: address, tokenB_addr: address, tokenA_quantity
 	self.tokenB.transferFrom(msg.sender, self, tokenB_quantity)
 	self.tokenBQty = tokenB_quantity
 
-	self.invariant = tokenAQty * tokenBQty
+	self.invariant = self.tokenAQty * self.tokenBQty
 
 	assert self.invariant > 0
 
@@ -40,21 +40,22 @@ def provideLiquidity(tokenA_addr: address, tokenB_addr: address, tokenA_quantity
 def tradeTokens(sell_token: address, sell_quantity: uint256):
 	assert sell_token == self.tokenA.address or sell_token == self.tokenB.address
 	if sell_token == self.tokenA.address:
-		sell_token.transferFrom(msg.sender, self, sell_quantity)
+		self.tokenA.transferFrom(msg.sender, self, sell_quantity)
+
 		new_total_tokens: uint256 = self.tokenAQty + sell_quantity
-		new_total_eth: uint256 = self.invariantA / new_total_tokens
-		eth_to_send: uint256 = self.totalEthQtyA - new_total_eth
-		send(msg.sender, eth_to_send)
-		self.tokenAQty = new_total_eth
-		self.totalTokenQtyA = new_total_tokens
+		new_total: uint256 = self.invariant / new_total_tokens
+		send_token: uint256 = self.tokenAQty - new_total
+		send(msg.sender, send_token)
+		self.tokenBQty = new_total
+		self.tokenAQty = new_total_tokens
 	elif sell_token == self.tokenB.address:
-		sell_token.transferFrom(msg.sender, self, sell_quantity)
-		new_total_tokens: uint256 = self.totalTokenQtyB + sell_quantity
-		new_total_eth: uint256 = self.invariantB / new_total_tokens
-		eth_to_send: uint256 = self.totalEthQtyB - new_total_eth
-		send(msg.sender, eth_to_send)
-		self.totalEthQtyB = new_total_eth
-		self.totalTokenQtyB = new_total_tokens
+		self.tokenB.transferFrom(msg.sender, self, sell_quantity)
+		new_total_tokens: uint256 = self.tokenBQty + sell_quantity
+		new_total: uint256 = self.invariant / new_total_tokens
+		send_token: uint256 = self.tokenBQty - new_total
+		send(msg.sender, send_token)
+		self.tokenAQty = new_total
+		self.tokenBQty = new_total_tokens
 
 
 	#Your code here
@@ -64,6 +65,6 @@ def tradeTokens(sell_token: address, sell_quantity: uint256):
 def ownerWithdraw():
 	assert self.owner == msg.sender
 	#Your code here
-	self.tokenA.transfer(self.owner, self.totalTokenQtyA)
-	self.tokenB.transfer(self.owner, self.totalTokenQtyB)
+	self.tokenA.transfer(self.owner, self.tokenAQty)
+	self.tokenB.transfer(self.owner, self.tokenBQty)
 	selfdestruct(self.owner)
