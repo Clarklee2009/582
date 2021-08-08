@@ -29,8 +29,8 @@ def provideLiquidity(tokenA_addr: address, tokenB_addr: address, tokenA_quantity
     self.totalTokenQtyA = tokenA_quantity
     self.invariantA = msg.value * tokenA_quantity
 
-	self.token_addressB = ERC20(tokenB_addr)
-    self.token_addressB.transferFrom(msg.sender, self, tokenB_quantity)
+	self.tokenB_address = ERC20(tokenB_addr)
+    self.tokenB_address.transferFrom(msg.sender, self, tokenB_quantity)
     
     self.totalTokenQtyB = tokenB_quantity
     self.invariantB = msg.value * tokenB_quantity
@@ -41,8 +41,24 @@ def provideLiquidity(tokenA_addr: address, tokenB_addr: address, tokenA_quantity
 @external
 def tradeTokens(sell_token: address, sell_quantity: uint256):
 	assert sell_token == self.tokenA.address or sell_token == self.tokenB.address
+	if sell_token == self.tokenA_address:
+		sell_token.transferFrom(msg.sender, self, sell_quantity)
+		new_total_tokens: uint256 = self.totalTokenQtyA + sell_quantity
+		new_total_eth: uint256 = self.invariantA / new_total_tokens
+		eth_to_send: uint256 = self.totalEthQtyA - new_total_eth
+		send(msg.sender, eth_to_send)
+		self.totalEthQtyA = new_total_eth
+		self.totalTokenQtyA = new_total_tokens
+	elif sell_token == self.tokenB.address:
+		sell_token.transferFrom(msg.sender, self, sell_quantity)
+		new_total_tokens: uint256 = self.totalTokenQtyB + sell_quantity
+		new_total_eth: uint256 = self.invariantB / new_total_tokens
+		eth_to_send: uint256 = self.totalEthQtyB - new_total_eth
+		send(msg.sender, eth_to_send)
+		self.totalEthQtyB = new_total_eth
+		self.totalTokenQtyB = new_total_tokens
 
-	
+
 	#Your code here
 
 # Owner can withdraw their funds and destroy the market maker
