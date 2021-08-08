@@ -25,13 +25,13 @@ def provideLiquidity(tokenA_addr: address, tokenB_addr: address, tokenA_quantity
 
 	self.tokenA = ERC20(tokenA_addr)
 	self.tokenA.transferFrom(msg.sender, self, tokenA_quantity) 
-	self.totalTokenQtyA = tokenA_quantity
-
+	self.tokenAQty = tokenA_quantity
 
 	self.tokenB = ERC20(tokenB_addr)
 	self.tokenB.transferFrom(msg.sender, self, tokenB_quantity)
-	self.totalTokenQtyB = tokenB_quantity
+	self.tokenBQty = tokenB_quantity
 
+	self.invariant = tokenAQty * tokenBQty
 
 	assert self.invariant > 0
 
@@ -39,13 +39,13 @@ def provideLiquidity(tokenA_addr: address, tokenB_addr: address, tokenA_quantity
 @external
 def tradeTokens(sell_token: address, sell_quantity: uint256):
 	assert sell_token == self.tokenA.address or sell_token == self.tokenB.address
-	if sell_token == self.tokenA_address:
+	if sell_token == self.tokenA.address:
 		sell_token.transferFrom(msg.sender, self, sell_quantity)
-		new_total_tokens: uint256 = self.totalTokenQtyA + sell_quantity
+		new_total_tokens: uint256 = self.tokenAQty + sell_quantity
 		new_total_eth: uint256 = self.invariantA / new_total_tokens
 		eth_to_send: uint256 = self.totalEthQtyA - new_total_eth
 		send(msg.sender, eth_to_send)
-		self.totalEthQtyA = new_total_eth
+		self.tokenAQty = new_total_eth
 		self.totalTokenQtyA = new_total_tokens
 	elif sell_token == self.tokenB.address:
 		sell_token.transferFrom(msg.sender, self, sell_quantity)
@@ -64,6 +64,6 @@ def tradeTokens(sell_token: address, sell_quantity: uint256):
 def ownerWithdraw():
 	assert self.owner == msg.sender
 	#Your code here
-	self.tokenA_address.transfer(self.owner, self.totalTokenQtyA)
-	self.tokenB_address.transfer(self.owner, self.totalTokenQtyB)
+	self.tokenA.transfer(self.owner, self.totalTokenQtyA)
+	self.tokenB.transfer(self.owner, self.totalTokenQtyB)
 	selfdestruct(self.owner)
