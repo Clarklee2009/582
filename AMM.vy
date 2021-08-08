@@ -28,15 +28,15 @@ def provideLiquidity(tokenA_addr: address, tokenB_addr: address, tokenA_quantity
 
 
 	self.tokenA_address = ERC20(tokenA_addr)
-    self.tokenA_address.transferFrom(msg.sender, self, tokenA_quantity)
+	self.tokenA_address.transferFrom(msg.sender, self, tokenA_quantity)
     
-    self.totalTokenQtyA = tokenA_quantity
+	self.totalTokenQtyA = tokenA_quantity
     
 
 	self.tokenB_address = ERC20(tokenB_addr)
-    self.tokenB_address.transferFrom(msg.sender, self, tokenB_quantity)
+	self.tokenB_address.transferFrom(msg.sender, self, tokenB_quantity)
     
-    self.totalTokenQtyB = tokenB_quantity
+	self.totalTokenQtyB = tokenB_quantity
     
 
 	assert self.invariant > 0
@@ -68,7 +68,7 @@ def tradeTokens(sell_token: address, sell_quantity: uint256):
 # Owner can withdraw their funds and destroy the market maker
 @external
 def ownerWithdraw():
-    assert self.owner == msg.sender
+	assert self.owner == msg.sender
 	#Your code here
 	self.token_address.transfer(self.owner, self.totalTokenQtyA)
 	self.token_address.transfer(self.owner, self.totalTokenQtyB)
