@@ -5,7 +5,7 @@ interface DAO:
 
 dao_address: public(address)
 owner_address: public(address)
-count = 20
+
 @external
 def __init__():
     self.dao_address = ZERO_ADDRESS
@@ -22,7 +22,6 @@ def _attack() -> bool:
         return False
     # TODO: Use the DAO interface to withdraw funds.
     # Make sure you add a "base case" to end the recursion
-
     return True
 
 @external
