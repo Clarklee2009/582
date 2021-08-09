@@ -5,7 +5,7 @@ interface DAO:
 
 dao_address: public(address)
 owner_address: public(address)
-
+count = 100
 @external
 def __init__():
     self.dao_address = ZERO_ADDRESS
