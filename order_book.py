@@ -8,6 +8,7 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+
 def process_order(order):
     #1 insert the order
     order_obj = Order(sender_pk=order['sender_pk'],receiver_pk=order['receiver_pk'], 
@@ -31,7 +32,7 @@ def process_order(order):
             order_obj.counterparty_id = e_order.id
             
             #3.3 if not completely filled
-            new_order = ""
+            new_order = Order()
             if order_obj.buy_amount > e_order.sell_amount:
               c_by = order_obj.id
               n_buy = order_obj.buy_amount - e_order.sell_amount
