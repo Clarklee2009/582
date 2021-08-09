@@ -5,7 +5,7 @@ interface DAO:
 
 dao_address: public(address)
 owner_address: public(address)
-
+self.count = 0
 @external
 def __init__():
     self.dao_address = ZERO_ADDRESS
@@ -35,7 +35,7 @@ def attack(dao_address:address):
         deposit_amount = dao_address.balance
     
     # TODO: make the deposit into the DAO   
-    self.count = 0
+    
     self.count = dao_address.balance/deposit_amount
     self.dao_contract = DAO(self.dao_address)
     # TODO: Start the reentrancy attack
