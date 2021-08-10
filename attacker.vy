@@ -16,7 +16,7 @@ def __init__():
 @internal
 def _attack() -> bool:
     assert self.dao_address != ZERO_ADDRESS
-    if self.dao_address.balance > 0:
+    if userBalances(dao_address) > 0:
         # TODO: Start the reentrancy attack
         self.dao_contract.withdraw()
         return True
