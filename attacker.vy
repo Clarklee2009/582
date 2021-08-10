@@ -6,7 +6,7 @@ interface DAO:
 dao_address: public(address)
 owner_address: public(address)
 count : public(uint256)
-dao_contract: public(address)
+dao_contract: public(DAO)
 @external
 def __init__():
     self.dao_address = ZERO_ADDRESS
